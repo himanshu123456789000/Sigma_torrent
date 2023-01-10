@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<style>
+input[type=text], select {
+  width: 25%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  /* padding: 20px; */
+}
+.error{
+    color:red;
+    font-size:10px;
+}
+</style>
+<body align="center">
+
+<%= form_with model: @browse do |form| %>
+  <div>
+    <%= form.label :Type %><br>
+    <%= form.text_field :type %>
+    <% @browse.errors.full_messages_for(:browse_title).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
+    <br>
+  </div>
+
+  <div>
+    <%= form.label :browse_author %><br>
+    <%= form.text_field :browse_author %><br>
+    <% @browse.errors.full_messages_for(:browse_author).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
+    <br>
+  </div>
+
+  <div>
+    <%= form.label :browse_pages %><br>
+    <%= form.text_field :browse_pages %><br>
+    <% @browse.errors.full_messages_for(:browse_author).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
+    <br>
+  </div>
+
+  <div>
+    <%= form.label :browse_price %><br>
+    <%= form.text_field :browse_price %><br>
+    <% @browse.errors.full_messages_for(:browse_author).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
+    <br>
+  </div>
+
+  <div>
+    <%= form.label :index %><br>
+    <%= form.text_area :index, :cols => 50, :rows => 10 %><br>
+    <% @browse.errors.full_messages_for(:browse_author).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+</body>
+</html>
+

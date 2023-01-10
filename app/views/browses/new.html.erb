@@ -1,0 +1,13 @@
+<h1>Upload your file</h1>
+
+<%= form_with model: @browse do |form| %>
+  <div>
+    <%= form.label :files %><br>
+    <%= form.file_field :files %>
+    <br>
+  </div>
+  <br>
+  <div>
+    <%= form.submit %>
+  </div>
+  <% end %>

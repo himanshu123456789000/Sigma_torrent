@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid;
+}
+
+table {
+  width: 100%;
+}
+</style>
+</head>
+<body>
+
+<h2>Browses Data</h2>
+<button><%= link_to "Upload New File", new_browse_path %></button>
+<button><%= link_to "Browse all data", "/" %></button>
+
+<br>
+<br>
+
+<div>
+<%= form_with url: "/", method: :get, local: true do |form| %>
+  <%= form.label :query, "Search for:" %>
+  <%= form.text_field :query %>
+  <%= form.submit "browse Search", :name => nil %>
+<% end %>
+<br>
+</div>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Download Link</th>
+    <th>Size of File</th>
+    <th>Created at</th>
+    <th>Uploaded by</th>
+  </tr>
+  <tr>
+    <% @browses.each do |browse| %>
+    <td><%= browse.type%></td>
+    <td><%= browse.name%></td>
+    <td><%= browse.link%></td>
+    <td><%= browse.size%></td>
+    <td><%= browse.created_at%></td>
+    <td><%= browse.uploaded_by%></td>
+    <!--<td><pre><button><%= link_to "Edit",action: :edit, id: browse.id %></button> || <button><%= link_to "Destroy",browse_path( browse.id), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }%></button></pre></td>-->
+  </tr>
+  <% end %>
+</table>
+
+</body>
+</html>
+

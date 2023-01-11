@@ -1,6 +1,6 @@
 
 
-<%= form_with model: [ @browse] do |form| %>
+<%= form_with model: [:admin, @browse] do |form| %>
   <div>
     <%= form.label :type %><br>
     <%= form.text_field :type %>

@@ -6,6 +6,7 @@ class CreateBrowses < ActiveRecord::Migration[7.0]
       t.string :link
       t.string :size
       t.string :uploaded_by
+      t.references :admin, null: false, foreign_key: true
 
       t.timestamps
     end

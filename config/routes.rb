@@ -3,5 +3,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
    root "browses#index"
-   resources :browses
+   get '/signup', to: 'admins#new'
+    
+  resources :admins
+  resources :browses
+    
+    # get '/details' => 'admins#show', :defaults => { :id =>  'name'}
+
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  get '/logout',  to: 'sessions#destroy'
 end

@@ -1,67 +1,62 @@
 class BrowsesController < ApplicationController
+  before_action :logged_in_admin
+
     def index
-        @browses = Browse.all
+      @admin_id = current_admin.id
+      @browses = Browse.all
     end
     # def index
     #     @browses = browse.where("browses.browse_title LIKE ?",["%#{params[:query]}%"])
     #     # @browses = browse.all
     #   end
+    def new
+      @browse = Browse.new
+    end
     
+    def show
+       @browse = Browse.find(params[:id])
+    end
     
-      def new
-        @browse = Browse.new
-      end
-    
-      def show
-        # @browse = Browse.find(params[:id])
-        file_data = params[:files]
-          if file_data.respond_to?(:read)
-            xml_contents = file_data.read
-          elsif file_data.respond_to?(:path)
-            xml_contents = File.read(file_data.path)
-          else
-            logger.error "Bad file_data: #{file_data.class.name}: #{file_data.inspect}"
-          end
-      end
-    
-      def create
-        @browse = Browse.new(browse_params)
-    
-        if @browse.save
-          redirect_to @browse
-        else
+    def create    
+      @admin_id = params[:admin_id]
+      # puts "this is Admin id #{@admin} "
+      @browse = Browse.new(browse_params)
+      @browse.admin_id = current_admin.id
+      if @browse.save
+        flash[:notice] = 'File Uploaded successfully'
+        redirect_to root_path
+      else
           render :new, status: :unprocessable_entity
-        end
       end
+    end
     
-      def edit
-        @browse = Browse.find(params[:id])
+    def edit
+      @browse = Browse.find(params[:id])
+    end
+    
+    def update
+      @browse = Browse.find(params[:id])
+      if @browse.update(browse_params)
+        redirect_to @browse
+      else
+        render :edit, status: :unprocessable_entity
       end
+    end
     
-      def update
-        @browse = Browse.find(params[:id])
+    def destroy
+      @browse = Browse.find(params[:id])
+      @browse.destroy
     
-        if @browse.update(browse_params)
-          redirect_to @browse
-        else
-          render :edit, status: :unprocessable_entity
-        end
-      end
-    
-      def destroy
-        @browse = browse.find(params[:id])
-        @browse.destroy
-    
-        redirect_to root_path, status: :see_other
-      end
+      redirect_to root_path
+    end
     
       # def search
       #   # @query = params[:query]
       #   @browse_search = browse.where("browses.browse_title LIKE ?",["%#{params[:query]}%"])
       # end
     
-      private
-        def browse_params
-          params.require(:browse).permit(:type, :name, :link, :size, :uploaded_by, :created_at, :files)
-        end
+    private
+    def browse_params
+      params.require(:browse).permit(:type, :name, :link, :size, :uploaded_by, :created_at, :files)
     end
+end

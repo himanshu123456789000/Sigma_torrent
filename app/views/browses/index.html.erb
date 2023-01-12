@@ -15,10 +15,16 @@ table {
 
 <h2>Browses Data</h2>
 <button><%= link_to "Browse all data", "/" %></button>
-
+<button><%= link_to "Upload New File", new_browse_path %></button>
 <br>
 <br>
-
+<div>
+<form method="GET" action="/">
+  <input type="search" placeholder="Search" name ="query">
+  <button type="submit">Search</button>
+</form>
+</div>
+<br>
 
 <table>
   <tr>

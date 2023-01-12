@@ -4,11 +4,20 @@
 <div class="row">
   <div class="col-md-4 offset-4">
     <%= form_with(model: @admin, local: true) do |f| %>
-      <%= render 'shared/error_messages' %>
-
+      <% if @admin.errors.any? %>
+        <div style="color: blue">
+          <ul>
+            <% @admin.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%= f.label :name %>
       <%= f.text_field :name, class: 'mb-1 form-control' %>
-
+      
+      <%= f.hidden_field :status, value:"Admin" %>
+      
       <%= f.label :email %>
       <%= f.email_field :email, class: 'mb-1 form-control' %>
 

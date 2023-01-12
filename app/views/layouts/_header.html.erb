@@ -6,6 +6,7 @@
     </div>
     <% if logged_in? %>
       <ul class="nav navbar-right ">
+        <li><%= link_to "Admin Details",admin_path(current_admin.id), class: "mx-2" %></li>
         <li><%= link_to "Log out", logout_path, class: "mx-2", method: :delete %></li> 
         <%= link_to "Browses", root_path, class: "mx-2" %>
       </ul>

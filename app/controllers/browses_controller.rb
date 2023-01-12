@@ -1,14 +1,18 @@
 class BrowsesController < ApplicationController
   before_action :logged_in_admin
+  before_action :authorize, only: [:edit, :update]
 
     def index
+      @browse = Browse.where("browses.name LIKE ?",["%#{params[:query]}%"])
       @admin_id = current_admin.id
-      @browses = Browse.all
+      @admin_detail = Admin.find(@admin_id)
+      @admin_status = @admin_detail.status
+      if @admin_status == "admin"
+        @browses = Browse.where(admin_id: @admin_id)
+      else
+        @browses = Browse.all
+      end
     end
-    # def index
-    #     @browses = browse.where("browses.browse_title LIKE ?",["%#{params[:query]}%"])
-    #     # @browses = browse.all
-    #   end
     def new
       @browse = Browse.new
     end

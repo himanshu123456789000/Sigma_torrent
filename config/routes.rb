@@ -7,8 +7,6 @@ Rails.application.routes.draw do
     
   resources :admins
   resources :browses
-    
-    # get '/details' => 'admins#show', :defaults => { :id =>  'name'}
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

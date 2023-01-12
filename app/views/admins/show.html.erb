@@ -1,12 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid;
+}
 
+table {
+  width: 100%;
+}
+</style>
+</head>
+<body>
 <div class="row">
   <div class="offset-4 col-md-4">
-      <h3 class='text-center'>
+      <h3 class='text-center'>Name:- 
         <%= @admin.name %>
       </h3>
-      <h3 class='text-center'>
+      <h3 class='text-center'>Email Id:-
         <%= @admin.email %>
+      </h3>
+      <h3 class='text-center'>Role:- 
+        <%= @admin.status %>
       </h3>
   </div>
 </div>
-<button><%= link_to "Upload New File", new_browse_path %></button>
+
+<%if @admin.status == "superadmin"%>
+  <br>
+  <br>
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Download Link</th>
+      <th>Size of File</th>
+      <th>Created at</th>
+      <th>Uploaded by</th>
+      <th>Edit || Delete<th>
+    </tr>
+    <tr>
+      <% @admins.each do |browse| %>
+      <td><%= browse.id%></td>
+      <td><%= browse.name%></td>
+      <td><%= browse.email%></td>
+      <td><%= browse.status%></td>
+      <td><%= browse.created_at%></td>
+      <td><%= browse.updated_at%></td>
+      <td>
+      <%= link_to "Destroy", admin_path(browse.id), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></td>
+      
+    </tr>
+    <% end %>
+  </table>
+  <%else%>
+    <center><h1>Hello Admin</h1></center>
+  <%end%>
+
+</body>
+</html>

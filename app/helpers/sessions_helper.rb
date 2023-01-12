@@ -30,4 +30,8 @@ module SessionsHelper
       def store_location
         session[:forwarding_url] = request.original_url if request.get?
       end
+
+      def authorize
+        redirect_to login_url, alert: "Not authorized" if current_admin.nil?
+      end
 end

@@ -3,10 +3,16 @@ class AdminsController < ApplicationController
       @admin = Admin.find(params[:id])
       if @admin.status == "superadmin"
         flash[:notice] = "Logged in as SuperAdmin"
-        @admins = Admin.all
+        @admins = Admin.where("admins.name LIKE ?",["%#{params[:query]}%"])
       else
         flash[:notice] = "logged in as Admin"
       end
+      unless session[:admin_id] == @admin.id
+        flash[:notice] = "Don't try to act smart!"
+        redirect_to admin_path(session[:admin_id])
+        return
+      end
+      # byebug
       
     end
     
@@ -18,7 +24,7 @@ class AdminsController < ApplicationController
       @admin = Admin.new(admin_params)
       respond_to do |format|
         if @admin.save
-          format.html { redirect_to admin_url(@admin), notice: "Product was successfully created." }
+          format.html { redirect_to login_path, notice: "Admin was successfully created." }
           format.json { render :show, status: :created, location: @admin }
         else
           format.html { render :new, status: :unprocessable_entity }

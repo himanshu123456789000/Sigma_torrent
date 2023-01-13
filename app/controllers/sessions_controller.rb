@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
     def new
         if logged_in?
           flash[:danger] = "You are Logged in please log out."
-          redirect_to root_path
+          redirect_to browses_path
       end
     end
     
@@ -12,13 +12,14 @@ class SessionsController < ApplicationController
           log_in admin
           redirect_to admin, notice: "Logged in!"
         else
-          flash.now[:danger] = 'Invalid email/password combination'
-          render 'new'
+          flash[:danger] = 'Invalid email/password combination'
+          # render 'new'
+          redirect_to "/login"
         end
       end
     
       def destroy
         log_out
-        redirect_to root_url
+        redirect_to login_url
       end
 end

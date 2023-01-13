@@ -26,22 +26,28 @@ table {
   </div>
 </div>
 
+
 <%if @admin.status == "superadmin"%>
+  <div>
+    <form method="GET" action admin_path>
+      <input type="search" placeholder="Search" name ="query">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+<button><%= link_to "Show all Admin", admin_path %></button>
   <br>
   <br>
   <table>
     <tr>
-      <th>Type</th>
       <th>Name</th>
-      <th>Download Link</th>
-      <th>Size of File</th>
+      <th>Email_id</th>
+      <th>Role</th>
       <th>Created at</th>
-      <th>Uploaded by</th>
-      <th>Edit || Delete<th>
+      <th>Updated at</th>
+      <th>Delete<th>
     </tr>
     <tr>
       <% @admins.each do |browse| %>
-      <td><%= browse.id%></td>
       <td><%= browse.name%></td>
       <td><%= browse.email%></td>
       <td><%= browse.status%></td>

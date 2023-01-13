@@ -14,12 +14,11 @@ table {
 <body>
 
 <h2>Browses Data</h2>
-<button><%= link_to "Browse all data", "/browses" %></button>
-<button><%= link_to "Upload New File", new_browse_path %></button>
+<button><%= link_to "Browse all data", "/" %></button>
 <br>
 <br>
 <div>
-<form method="GET" action="/browses">
+<form method="GET" action="/">
   <input type="search" placeholder="Search" name ="query">
   <button type="submit">Search</button>
 </form>
@@ -34,11 +33,9 @@ table {
     <th>Size of File</th>
     <th>Created at</th>
     <th>Uploaded by</th>
-    <th>Delete<th>
   </tr>
   <tr>
     <% @browses.each do |browse| %>
-    
     <td><%= browse.type%></td>
     <td><%= browse.name%></td>
     <td><%= browse.link%></td>
@@ -46,10 +43,6 @@ table {
     <td><%= browse.created_at%></td>
     <td><%= browse.uploaded_by%></td>
     <td>
-    <%= link_to "Destroy", browse_path(browse.id), data: {
-                  turbo_method: :delete,
-                  turbo_confirm: "Are you sure?"
-                } %></td>
     
   </tr>
   <% end %>

@@ -3,16 +3,18 @@ class BrowsesController < ApplicationController
   before_action :authorize, only: [:edit, :update]
 
     def index
-      @browse = Browse.where("browses.name LIKE ?",["%#{params[:query]}%"])
+      
       @admin_id = current_admin.id
       @admin_detail = Admin.find(@admin_id)
       @admin_status = @admin_detail.status
       if @admin_status == "admin"
         @browses = Browse.where(admin_id: @admin_id)
+        @browses = @browses.where("browses.name LIKE ?",["%#{params[:query]}%"])
       else
-        @browses = Browse.all
+        @browses = Browse.where("browses.name LIKE ?",["%#{params[:query]}%"])
       end
     end
+    
     def new
       @browse = Browse.new
     end
@@ -61,6 +63,6 @@ class BrowsesController < ApplicationController
     
     private
     def browse_params
-      params.require(:browse).permit(:type, :name, :link, :size, :uploaded_by, :created_at, :files)
+      params.require(:browse).permit(:type, :name, :link, :size, :uploaded_by, :created_at, :query, :files)
     end
 end

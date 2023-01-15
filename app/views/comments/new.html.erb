@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid;
+}
+
+table {
+  width: 100%;
+}
+</style>
+</head>
+<body>
+<center><h2>Add a comment:</h2>
+<%= form_with model: [ @comment ] do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <%= form.hidden_field :browse_id, value: @browse_id %>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+</center>
+<table>
+    <tr>
+      <th>Name</th>
+      <th>Email_id</th>
+      <th>Delete</th>
+    </tr>
+    <tr>
+      <% @comments.each do |comment| %>
+      <td><%= comment.commenter%></td>
+      <td><%= comment.body%></td>
+      
+      <td><%= link_to "Destroy", comment_path(comment.id, browse_id: @browse_id), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></td>
+    </tr>
+    <% end %>
+  </table>
+
+  </body>
+</html>

@@ -33,6 +33,7 @@ table {
     <th>Size of File</th>
     <th>Created at</th>
     <th>Uploaded by</th>
+    <th>comments</th>
   </tr>
   <tr>
     <% @browses.each do |browse| %>
@@ -42,7 +43,7 @@ table {
     <td><%= browse.size%></td>
     <td><%= browse.created_at%></td>
     <td><%= browse.uploaded_by%></td>
-    <td>
+    <td><%= link_to "comments", new_comment_path( browse_id: browse.id )%></td>
     
   </tr>
   <% end %>

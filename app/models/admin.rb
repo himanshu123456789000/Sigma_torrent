@@ -1,5 +1,5 @@
 class Admin < ApplicationRecord
-    has_many :browses, dependent: :destroy
+  has_many :browses, dependent: :destroy
   has_secure_password
   before_save { self.email = email.downcase }
   validates :name, presence: true

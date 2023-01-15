@@ -34,7 +34,8 @@ table {
     <th>Size of File</th>
     <th>Created at</th>
     <th>Uploaded by</th>
-    <th>Delete<th>
+    <th>Delete</th>
+    <th>Comments</th>
   </tr>
   <tr>
     <% @browses.each do |browse| %>
@@ -50,6 +51,7 @@ table {
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
                 } %></td>
+    <td><%= link_to "comments", new_comment_path( browse_id: browse.id )%></td>
     
   </tr>
   <% end %>

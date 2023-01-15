@@ -40,18 +40,29 @@ table {
   <tr>
     <% @browses.each do |browse| %>
     
-    <td><%= browse.type%></td>
-    <td><%= browse.name%></td>
-    <td><%= browse.link%></td>
-    <td><%= browse.size%></td>
+    <td>.<%= browse.attachment.file.extension%></td>
+
+    <td><%= browse.attachment.file.filename%></td>
+
+    <td><%= link_to "Download", browse.attachment_url %></td>
+
+    <% size = browse.attachment.file.size%>
+    <% size = size.to_f/1000000 %>
+
+    <td><%= size.round(2)%> MB</td>
     <td><%= browse.created_at%></td>
-    <td><%= browse.uploaded_by%></td>
+
+    <% a=browse.admin_id %>
+    <% a=Admin.find(a) %>
+
+    <td><%= a.name %></td>
     <td>
     <%= link_to "Destroy", browse_path(browse.id), data: {
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
                 } %></td>
     <td><%= link_to "comments", new_comment_path( browse_id: browse.id )%></td>
+    <td></td>
     
   </tr>
   <% end %>

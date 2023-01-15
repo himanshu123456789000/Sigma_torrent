@@ -1,34 +1,17 @@
 
-
 <%= form_with model: [ @browse] do |form| %>
+
   <div>
-    <%= form.label :type %><br>
-    <%= form.text_field :type %>
+    <%= form.label :attachment %><br>
+    <%= form.file_field :attachment %><br>
     <br>
   </div>
-
   <div>
     <%= form.label :name %><br>
     <%= form.text_field :name %><br>
     <br>
   </div>
 
-  <div>
-    <%= form.label :link %><br>
-    <%= form.text_field :link %><br>
-    <br>
-  </div>
-
-  <div>
-    <%= form.label :size %><br>
-    <%= form.text_field :size %><br>
-    <br>
-  </div>
-
-  <div>
-    <%= form.label :uploaded_by %><br>
-    <%= form.text_field :uploaded_by, :cols => 50, :rows => 10 %><br>
-  </div>
   <div>
     <%= form.submit %>
   </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_13_103700) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_15_112141) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,14 +49,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_103700) do
   end
 
   create_table "browses", force: :cascade do |t|
-    t.string "type"
-    t.string "name"
-    t.string "link"
-    t.string "size"
-    t.string "uploaded_by"
+    t.string "attachment"
     t.integer "admin_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["admin_id"], name: "index_browses_on_admin_id"
   end
 

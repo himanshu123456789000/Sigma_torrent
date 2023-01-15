@@ -34,9 +34,14 @@ class AdminsController < ApplicationController
 
   def destroy
     @admin = Admin.find(params[:id])
-    @admin.destroy
-      
-    redirect_to admin_path
+    if @admin.status == "superadmin"
+      flash[:notice] = "You can't destroy yourself"
+      redirect_to admin_path
+      flash[:notice] = "You can't destroy yourself"
+    else
+      @admin.destroy
+      redirect_to admin_path
+    end
   end
       
   private    

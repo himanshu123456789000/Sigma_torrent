@@ -56,6 +56,6 @@ class BrowsesController < ApplicationController
       
   private
   def browse_params
-    params.require(:browse).permit(:type, :name, :link, :size, :uploaded_by, :created_at, :query, :files)
+    params.require(:browse).permit(:attachment, :created_at, :query, :name)
   end
 end

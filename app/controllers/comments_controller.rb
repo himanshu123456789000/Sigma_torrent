@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
         redirect_to root_path
         flash[:notice] = 'Comment Uploaded successfully'
       else
-        redirect_to new_comment_path
+        redirect_to root_path
       end
   end
     

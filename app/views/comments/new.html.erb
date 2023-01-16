@@ -32,17 +32,20 @@ table {
     <tr>
       <th>Commenter Name</th>
       <th>Comment</th>
-      <th>Delete</th>
+      <%if logged_in? %>
+        <th>Delete</th>
+      <%end%>
     </tr>
     <tr>
       <% @comments.each do |comment| %>
       <td><%= comment.commenter%></td>
       <td><%= comment.body%></td>
-      
-      <td><%= link_to "Destroy", comment_path(comment.id, browse_id: @browse_id), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></td>
+      <% if logged_in? %>
+        <td><%= link_to "Destroy", comment_path(comment.id, browse_id: @browse_id), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %></td>
+      <%end%>
     </tr>
     <% end %>
   </table>

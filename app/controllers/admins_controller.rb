@@ -7,12 +7,15 @@ class AdminsController < ApplicationController
     else
       flash[:notice] = "logged in as Admin"
     end
-      
-    unless session[:admin_id] == @admin.id
-      flash[:notice] = "Don't try to act smart!"
-      redirect_to admin_path(session[:admin_id])
-      return
-    end    
+    if logged_in?  
+      unless session[:admin_id] == @admin.id 
+        flash[:notice] = "Don't try to act smart!"
+        redirect_to admin_path(session[:admin_id])
+        return
+      end 
+    else
+      redirect_to login_path
+    end   
   end
       
   def new
